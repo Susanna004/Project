@@ -1,4 +1,6 @@
-class Trchun extends LivingCreature  {
+var LivingCreature = require("./LivingCreature.js")
+
+module.exports = class Trchun extends LivingCreature  {
     constructor(x, y, index) {
         super(x,y,index)
         this.energy = 15;

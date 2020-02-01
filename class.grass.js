@@ -1,4 +1,6 @@
-class Grass extends LivingCreature {
+var LivingCreature = require("./LivingCreature.js");
+
+module.exports = class Grass extends LivingCreature {
 
     // bazmanuma azat vandakneri himan vra
     mul() {
