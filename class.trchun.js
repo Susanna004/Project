@@ -1,4 +1,5 @@
 var LivingCreature = require("./LivingCreature.js")
+var random = require("./random");
 
 module.exports = class Trchun extends LivingCreature  {
     constructor(x, y, index) {
@@ -25,8 +26,8 @@ module.exports = class Trchun extends LivingCreature  {
     }
     move() {
       
-        let arr = this.chooseCell(0)
-        var newCell = arr[Math.floor(Math.random() * arr.length)];  
+        let emptyCells = this.chooseCell(0)
+        var newCell = random(emptyCells);  
 
         if (newCell) {
             var newX = newCell[0];

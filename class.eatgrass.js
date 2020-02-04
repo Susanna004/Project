@@ -1,4 +1,5 @@
 var LivingCreature = require("./LivingCreature.js")
+var random = require("./random");
 
 module.exports = class GrassEater extends LivingCreature{
     constructor(x, y, index) {
@@ -25,8 +26,8 @@ module.exports = class GrassEater extends LivingCreature{
     //qayluma
     move() {
         //yntruma vandak
-        let arr = this.chooseCell(0)
-        var newCell = arr[Math.floor(Math.random() * arr.length)];  
+        let emptyCells = this.chooseCell(0)
+        var newCell = random(emptyCells);  
         if (newCell && newCell.length) {
             var newX = newCell[0];
             var newY = newCell[1];
@@ -39,8 +40,8 @@ module.exports = class GrassEater extends LivingCreature{
     }
     eat() {
 
-        let arr = this.chooseCell(0)
-        var newCell = arr[Math.floor(Math.random() * arr.length)]; 
+        let emptyCells = this.chooseCell(0)
+        var newCell = random(emptyCells);  
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
@@ -60,9 +61,8 @@ module.exports = class GrassEater extends LivingCreature{
         }
     }
     mul() {
-
-        let arr = this.chooseCell(0)
-        var newCell = arr[Math.floor(Math.random() * arr.length)]; 
+        let emptyCells = this.chooseCell(0)
+        var newCell = random(emptyCells);  
         if (this.energy >= 8 && newCell) {
             var newGrassEater = new GrassEater(newCell[0], newCell[1], this.index);
             grassEaterArr.push(newGrassEater);
