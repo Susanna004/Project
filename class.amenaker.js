@@ -26,7 +26,8 @@ module.exports = class Amenaker extends LivingCreature{
     }
     move() {
         //yntruma vandak
-        var newCell = random(this.chooseCell(0));
+        let arr = this.chooseCell(0)
+        var newCell = arr[Math.floor(Math.random() * arr.length)]; 
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
@@ -48,7 +49,8 @@ module.exports = class Amenaker extends LivingCreature{
         var newCell2 = this.chooseCell(2);
         var newCell3 = this.chooseCell(3);
         var newCell11 = newCell1.concat(newCell2, newCell3)
-        var newCell = random(newCell11);
+        let arr = newCell11;
+        var newCell = arr[Math.floor(Math.random() * arr.length)]; 
 
         if (newCell) {
             var newX = newCell[0];
@@ -89,7 +91,8 @@ module.exports = class Amenaker extends LivingCreature{
     }
     mul() {
 
-        var newCell = random(this.chooseCell(0));
+        let arr = this.chooseCell(0)
+        var newCell = arr[Math.floor(Math.random() * arr.length)]; 
         if (newCell) {
             var newAmenaker = new Amenaker(newCell[0], newCell[1], this.index);
             amenakerArr.push(newAmenaker);

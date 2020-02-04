@@ -25,8 +25,9 @@ module.exports = class GrassEater extends LivingCreature{
     //qayluma
     move() {
         //yntruma vandak
-        var newCell = random(this.chooseCell(0));
-        if (newCell) {
+        let arr = this.chooseCell(0)
+        var newCell = arr[Math.floor(Math.random() * arr.length)];  
+        if (newCell && newCell.length) {
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[this.y][this.x] = 0;
@@ -38,7 +39,8 @@ module.exports = class GrassEater extends LivingCreature{
     }
     eat() {
 
-        var newCell = random(this.chooseCell(1));
+        let arr = this.chooseCell(0)
+        var newCell = arr[Math.floor(Math.random() * arr.length)]; 
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
@@ -59,7 +61,8 @@ module.exports = class GrassEater extends LivingCreature{
     }
     mul() {
 
-        var newCell = random(this.chooseCell(0));
+        let arr = this.chooseCell(0)
+        var newCell = arr[Math.floor(Math.random() * arr.length)]; 
         if (this.energy >= 8 && newCell) {
             var newGrassEater = new GrassEater(newCell[0], newCell[1], this.index);
             grassEaterArr.push(newGrassEater);

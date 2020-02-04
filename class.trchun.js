@@ -24,9 +24,9 @@ module.exports = class Trchun extends LivingCreature  {
         return super.chooseCell(character);
     }
     move() {
-        var newCells = this.chooseCell(0);
-
-        var newCell = random(newCells);
+      
+        let arr = this.chooseCell(0)
+        var newCell = arr[Math.floor(Math.random() * arr.length)];  
 
         if (newCell) {
             var newX = newCell[0];
@@ -44,7 +44,8 @@ module.exports = class Trchun extends LivingCreature  {
 
     eat() {
 
-        var newCell = random(this.chooseCell(4));
+        let arr = this.chooseCell(4)
+        var newCell = arr[Math.floor(Math.random() * arr.length)]; 
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
@@ -67,7 +68,8 @@ module.exports = class Trchun extends LivingCreature  {
 
     mul() {
 
-        var newCell = random(this.chooseCell(0));
+        let arr = this.chooseCell(0)
+        var newCell = arr[Math.floor(Math.random() * arr.length)]; 
         if (newCell && this.energy > 15) {
             var newTrchun = new Trchun(newCell[0], newCell[1], this.index);
             trchunArr.push(newTrchun);

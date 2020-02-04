@@ -43,7 +43,7 @@ app.get("/", function(req, res){
  var Trchun = require("./class.trchun.js");
 
  matrix = genMatrix(w,h)
- for (var y = 0; y < matrix.length; y++) {
+ for (var y = 0; y < matrix.length; ++y) {
     for (var x = 0; x < matrix[y].length; ++x) {
         if (matrix[y][x] == 1) {
             var gr = new Grass(x, y);

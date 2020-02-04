@@ -24,7 +24,8 @@ module.exports = class Gishatich extends LivingCreature {
     }
     move() {
         //yntruma vandak
-        var newCell = random(this.chooseCell(0));
+        let arr = this.chooseCell(0);
+        var newCell = arr[Math.floor(Math.random() * arr.length)]; 
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
@@ -38,7 +39,8 @@ module.exports = class Gishatich extends LivingCreature {
     }
     eat() {
 
-        var newCell = random(this.chooseCell(2));
+        let arr = this.chooseCell(2);
+        var newCell = arr[Math.floor(Math.random() * arr.length)]; 
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
@@ -57,7 +59,8 @@ module.exports = class Gishatich extends LivingCreature {
     }
     mul() {
 
-        var newCell = random(this.chooseCell(0));
+        let arr = this.chooseCell(0)
+        var newCell = arr[Math.floor(Math.random() * arr.length)]; 
         if (this.energy >= 8 && newCell) {
             var newGishatich = new Gishatich(newCell[0], newCell[1], this.index);
             gishatichArr.push(newGishatich);
