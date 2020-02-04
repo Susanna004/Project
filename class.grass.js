@@ -4,6 +4,7 @@ module.exports = class Grass extends LivingCreature {
 
     // bazmanuma azat vandakneri himan vra
     mul() {
+        // setTimeout(mul(), 6000);
         this.multiply++;
 
         let arr = this.chooseCell(0)
