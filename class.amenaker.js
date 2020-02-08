@@ -25,6 +25,7 @@ module.exports = class Amenaker extends LivingCreature{
         this.getNewCoordinates();
         return super.chooseCell(character);
     }
+    
     move() {
         //yntruma vandak
         let emptyCells = this.chooseCell(0)
@@ -42,8 +43,9 @@ module.exports = class Amenaker extends LivingCreature{
             }
         }
 
-
+       
     }
+   
     eat() {
 
         var newCell1 = this.chooseCell(1);
@@ -86,6 +88,7 @@ module.exports = class Amenaker extends LivingCreature{
                 this.mul();
             }
         }
+
         else {
             this.move()
         }
@@ -101,7 +104,7 @@ module.exports = class Amenaker extends LivingCreature{
             this.multiply = 0;
         }
     }
-
+ 
 
     die() {
         // this.energy--
@@ -118,4 +121,4 @@ module.exports = class Amenaker extends LivingCreature{
 
 
     }
-}
+}   

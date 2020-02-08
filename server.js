@@ -2,7 +2,19 @@ var express = require("express");
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-var random = require("./random");
+let random = require("./random");
+
+grassArr = [];
+grassEaterArr = [];
+matrix = [];
+gishatichArr = [];
+amenakerArr = [];
+trchunArr = [];
+grassHashiv = 0;
+amenakerHashiv = 0;
+grassEaterHashiv = 0;
+weatherinit = 1;
+weather = 1;
 
 app.use(express.static("."));
 app.get("/", function (req, res) {
@@ -12,37 +24,31 @@ app.get("/", function (req, res) {
 server.listen(3000);
 
 
-function genMatrix(w, h) {
-    var matrix = [];
-    for (var y = 0; y < h; y++) {
-        matrix[y] = [];
-        for (var x = 0; x < w; x++) {
-            var r = Math.floor(Math.random() * 100);
-            if (r < 20) r = 0
-            else if (r < 40) r = 1;
-            else if (r < 60) r = 2;
-            else if (r < 75) r = 3;
-            else if (r < 85) r = 4;
-            else if (r < 100) r = 5;
-            matrix[y][x] = r;
-        }
-    }
-    return matrix;
-}
-
-grassArr = [];
-grassEaterArr = [];
-matrix = [];
-gishatichArr = [];
-amenakerArr = [];
-trchunArr = [];
-grassHashiv = 0;
 
 var Grass = require("./class.grass.js");
 var GrassEater = require("./class.eatgrass.js");
 var Gishatich = require("./class.gishatich.js");
 var Amenaker = require("./class.amenaker.js");
 var Trchun = require("./class.trchun.js");
+
+function getWeather(){
+    weatherinit++;
+    if(weatherinit==4){
+        weather=="Winter"
+
+    }
+    if(weatherinit==3){
+        weather=="Autumn"
+    }
+    if(weatherinit==2){
+        weather=="Spring"
+    }
+    if(weatherinit==1){
+        weather=="Summer"
+    }
+    io.sockets.emit("exanak",weather);
+}
+// statistics = {"objarr":[]}
 
 function matrixGenerator(matrixSize, Grass, GrassEater, Gishatich, Amenaker, Trchun) {
     for (let i = 0; i < matrixSize; i++) {
@@ -78,35 +84,40 @@ function matrixGenerator(matrixSize, Grass, GrassEater, Gishatich, Amenaker, Trc
     }
 }
 
-matrixGenerator(20, 1, 5, 10, 18, 19);
+matrixGenerator(20, 30 ,45 ,10 , 5, 25);
 
 
 function creatingObjects() {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 2) {
-                var grassEater = new GrassEater(x, y);
+                var grassEater = new GrassEater(x, y,2);
                 grassEaterArr.push(grassEater);
+                grassEaterHashiv++;
             }
 
             else if (matrix[y][x] == 1) {
-                var grass = new Grass(x, y);
+                var grass = new Grass(x, y,1);
                 grassArr.push(grass);
                 grassHashiv++;
             }
 
             if (matrix[y][x] == 3) {
-                var gishatich = new Gishatich(x, y);
+                var gishatich = new Gishatich(x, y,3);
                 gishatichArr.push(gishatich);
             }
 
             if (matrix[y][x] == 4) {
-                var amenaker = new Amenaker(x, y);
+               
+                var amenaker = new Amenaker(x, y,4);
                 amenakerArr.push(amenaker);
+                amenakerHashiv++;
+                
+               
             }
 
             if (matrix[y][x] == 5) {
-                var trchun = new Trchun(x, y);
+                var trchun = new Trchun(x, y,5);
                 trchunArr.push(trchun);
             }
         }
@@ -157,11 +168,14 @@ function drowserver() {
     }
 
 
-
+getWeather();
 
 let sendData = {
     matrix: matrix,
-    grassCounter: grassHashiv
+    grassCounter: grassHashiv,
+    amenakerCounter: amenakerHashiv,
+    weatherserver: weather,
+    // grassEaterCounter: grassEaterHashiv
 }
 
 
@@ -169,5 +183,6 @@ io.sockets.emit("data", sendData);
 }
 
 
-
-setInterval(drowserver, 1000)
+setInterval(getWeather, 3000)
+setInterval(drowserver, 300)
+   

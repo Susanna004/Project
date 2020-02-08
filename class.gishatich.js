@@ -4,7 +4,7 @@ var random = require("./random");
 module.exports = class Gishatich extends LivingCreature {
     constructor(x, y, index) {
         super(x, y, index);
-        this.energy = 8;
+        this.energy = 10;
     }
     getNewCoordinates() {
         this.directions = [
@@ -25,6 +25,7 @@ module.exports = class Gishatich extends LivingCreature {
     }
     move() {
         //yntruma vandak
+        this.energy--;
         let emptyCells = this.chooseCell(0)
         var newCell = random(emptyCells);   
         if (newCell) {
@@ -34,19 +35,22 @@ module.exports = class Gishatich extends LivingCreature {
             matrix[newY][newX] = this.index;
             this.y = newY;
             this.x = newX;
-            this.energy--;
         }
 
     }
     eat() {
-
+        
         let emptyCells = this.chooseCell(2);
         var newCell = random(emptyCells);  
+
         if (newCell) {
+            this.energy++;
             var newX = newCell[0];
             var newY = newCell[1];
+
             matrix[this.y][this.x] = 0;
             matrix[newY][newX] = this.index;
+            
             for (var i in grassEaterArr) {
                 if (newX == grassEaterArr[i].x && newY == grassEaterArr[i].y) {
                     grassEaterArr.splice(i, 1);
@@ -62,7 +66,7 @@ module.exports = class Gishatich extends LivingCreature {
 
         let emptyCells = this.chooseCell(0)
         var newCell = random(emptyCells);  
-        if (this.energy >= 8 && newCell) {
+        if (this.energy >= 6 && newCell) {
             var newGishatich = new Gishatich(newCell[0], newCell[1], this.index);
             gishatichArr.push(newGishatich);
             matrix[newCell[1]][newCell[0]] = 3;

@@ -13,10 +13,11 @@
 	<style>
         #legend {position:absolute;top: 0;right: 0;width: 800px;} .legend-color {width: 30px;height: 30px;} td {border: 1px solid black; font-size: 14px; margin-left: 10px; padding-left:10px;}
     </style>
-</head>
 
+  <hr>
+    <button id="click" onclick="myFunction()">Click me</button>
 
-    <table id="legend">
+  <table id="legend">
         <tr>
             <td class="legend-color">Գույն</td>
             <td>Անվանում</td>
@@ -37,8 +38,6 @@
         <tr>
             <td class="legend-color" style="background-color:green"></td>
             <td>Խոտ</td>
-            <td></td>
-            <td></td>
             <td>Մոտակա 8 վանդակներում, 4 տակտը մեկ</td>
             <td></td>
         </tr>
@@ -74,7 +73,18 @@
             <td>Բազմանում է մոտակա տարածքներում, երբ էներգիան 8֊ից ավել է</td>
             <td>Սատկում է, երբ էներգիան փոքր է 0֊ից</td>
         </tr>
-    </table> 
+        <tr>
+            <td>Հաշվում է քանակը</td>
+            <td>ամենակերի</td>
+            <td id="amenakerCount"></td>
+            <td id="grassCount"></td>
+             <td id="grassEaterCount"></td>
+
+        </tr>
+        <p id=  "weather"></p>
+    </table>  
+   
+
 </body>
 
 

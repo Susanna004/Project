@@ -1,10 +1,11 @@
 function setup() {
   var socket = io(); 
-  var side = 20; 
+  var side = 32; 
   
   var matrix = [];
-//   let grassCountElement = document.getElementById('grassCount');
-//   let grassEaterCountElement = document.getElementById('grassEaterCount');
+let grassCountElement = document.getElementById('grassCount');
+let amenakerCountElement = document.getElementById('amenakerCount');
+// let grassEaterCountElement = document.getElementById('grassEaterCount');
 
   
   socket.on("data", drawCreatures);
@@ -12,80 +13,77 @@ function setup() {
   function drawCreatures(data) {
  
       matrix = data.matrix;
-    //   grassCountElement.innerText = data.grassCounter;
+      grassCountElement.innerText = data.grassCounter;
+      amenakerCountElement.innerText = data.amenakerCounter;
+    //   grassEaterCountElement.innerText = data.grassEaterCount;
       createCanvas(matrix[0].length * side, matrix.length * side)
 
       background('#acacac');
     
+    
 
-      //! Drawing and coloring RECTs
       for (var i = 0; i < matrix.length; i++) {
           for (var j = 0; j < matrix[i].length; j++) {
               if (matrix[i][j] == 1) {
-                  fill("green");
+                  fill("#538200");
                   rect(j * side, i * side, side, side);
-              } else if (matrix[i][j] == 2) {
-                  fill("orange");
+              } 
+              else if (matrix[i][j] == 2) {
+                  fill("yellow");
                   rect(j * side, i * side, side, side);
-              } else if (matrix[i][j] == 0) {
+              } 
+              else if (matrix[i][j] == 0) {
                   fill('#acacac');
                   rect(j * side, i * side, side, side);
-              } else if (matrix[i][j] == 3) {
-                  fill('red');
+              } 
+              else if (matrix[i][j] == 3) {
+                  fill('#4682B4');
                   rect(j * side, i * side, side, side);
-              } else if (matrix[i][j] == 4) {
-                  fill('blue');
+              } 
+              else if (matrix[i][j] == 4) {
+                  fill('#ff4d4d');
                   rect(j * side, i * side, side, side);
-              } else if (matrix[i][j] == 5) {
-                  fill('yellow');
+              } 
+              else if (matrix[i][j] == 5) {
+                  fill('white');
                   rect(j * side, i * side, side, side);
               }
+   
           }
       }
-  }
-}
-//   let grassCountElement = document.getElementById('grassCount');
-//   let grassEaterCountElement = document.getElementById('grassEaterCount');
-
-// socket.on("data", drawCreatures);
-
-
-// matrix = drawMatrix(m,n)
-// function drawMatrix() {
-//     console.log(matrix);
-//     for (var y = 0; y < matrix.length; y++) {
-//         for (var x = 0; x < matrix[y].length; x++) {
-//             if (matrix[y][x] == 1) {
-//                 fill("#538200");
-
-//             }
-//             else if (matrix[y][x] == 2) {
-//                 fill("yellow");
-          
-//             }
-
-//             else if (matrix[y][x] == 3) {
-//                 fill("#4682B4");
- 
-//             }
-//             else if (matrix[y][x] == 4) {
-//                 fill("#ff4d4d");
-    
-//             }
-
-//             else if (matrix[y][x] == 5) {
-//                 fill("white");
-            
-//             }
-//             else if (matrix[y][x] == 0) {
-//                 fill("#acacac");
-                
-//             }
-//         }rect(x * side, y * side, side, side);
+//       document.getElementById("weather") = function drawWeather(){
+//         if(weather == "Summer"){
+//             package.innerText = "Summer";
+//         }
+//        else if(weather == "Winter"){
+//             package.innerText = "winter";
+//         }
+//         else if(weather == "Autumn"){
+//             package.innerText = "Autumn";
+//         }
+//         else if(weather == "Spring"){
+//             package.innerText = "Spring";
+//         }
 //     }
-// }
+//   }
+//  socket.on("exanak",getWeather);
+//  socket.on("exanak", function(w){
+//      wather = w;
+//     console.log(weather);
+//  })
+    //  function myFunction() {
+    //     for (var i = 0; i < matrix.length; i++) {
+    //         for (var j = 0; j < matrix[i].length; j++) {
+    //             if (matrix[i][j] == 0) {
+    //                 fill("black");
+    //                 rect(j * side, i * side, side, side);
+    //             }
+    //   }
+    // }
+    // }
+}
 
-//     socket.on("matrix",drawMatrix);
+   
 
 
 
@@ -94,3 +92,4 @@ function setup() {
 
     
 
+}
