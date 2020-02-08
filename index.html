@@ -11,11 +11,11 @@
 
 <body>
 	<style>
-        #legend {position:absolute;top: 0;right: 0;width: 800px;} .legend-color {width: 30px;height: 30px;} td {border: 1px solid black; font-size: 14px; margin-left: 10px; padding-left:10px;}
+        #legend {position:absolute;top: 0;right: 0;width: 800px;} .legend-color {width: 30px;height: 30px;} td {border: 1px solid black; font-size: 14px; margin-left: 10px; padding-left:10px; border-collapse:collapse;}
+       
     </style>
 
-  <hr>
-    <button id="click" onclick="myFunction()">Click me</button>
+
 
   <table id="legend">
         <tr>
@@ -33,7 +33,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
+            <td id= "weather"></td>
         </tr>
         <tr>
             <td class="legend-color" style="background-color:green"></td>
@@ -81,7 +81,7 @@
              <td id="grassEaterCount"></td>
 
         </tr>
-        <p id=  "weather"></p>
+        <p ></p>
     </table>  
    
 
