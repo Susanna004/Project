@@ -255,6 +255,7 @@ var obj = { "info": [] };
 function writefile() {
     var fileName = "Statics.json";
     obj.info.push({ "cnvac xoteri qanak": grassHashiv });
+    obj.info.push({ "cnvac amenakerneri qanak": amenakerHashiv });
     fs.writeFileSync(fileName, JSON.stringify(obj, null, 3))
 }
 
