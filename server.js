@@ -38,18 +38,17 @@ function getWeather() {
         weatherinit = 1;
     }
     else if (weatherinit == 4) {
-        weather == "Winter"
+        weather = "Winter"
     }
     else if (weatherinit == 3) {
-        weather == "Autumn"
+        weather = "Autumn"
     }
     else if (weatherinit == 2) {
-        weather == "Spring"
+        weather = "Spring"
     }
     else if (weatherinit == 1) {
-        weather == "Summer"
+        weather = "Summer"
     }
-    io.sockets.emit("exanak", weather);
 }
 
 
@@ -87,11 +86,15 @@ function matrixGenerator(matrixSize, Grass, GrassEater, Gishatich, Amenaker, Trc
     }
 }
 
-matrixGenerator(20, 30, 45, 10, 25);
+matrixGenerator(20, 30, 45, 10, 0, 25);
 
 setTimeout(function () {
-    matrix[15][10] = 4
-}, 3000)
+    console.log(matrix)
+    matrix[5][10] = 4
+    var amenaker = new Amenaker(5, 10, 4);
+    amenakerArr.push(amenaker);
+    amenakerHashiv++;
+}, 6000)
 
 function creatingObjects() {
     for (var y = 0; y < matrix.length; y++) {
@@ -113,15 +116,11 @@ function creatingObjects() {
                 gishatichArr.push(gishatich);
             }
 
-            if (matrix[y][x] == 4) {
-
-                var amenaker = new Amenaker(x, y, 4);
-                amenakerArr.push(amenaker);
-                amenakerHashiv++;
-
-
-            }
-
+            // if (matrix[y][x] == 4) {
+            //     var amenaker = new Amenaker(x, y, 4);
+            //     amenakerArr.push(amenaker);
+            //     amenakerHashiv++;
+            // }
             if (matrix[y][x] == 5) {
                 var trchun = new Trchun(x, y, 5);
                 trchunArr.push(trchun);
@@ -166,15 +165,11 @@ function drowserver() {
     }
     if (trchunArr[0] !== undefined) {
         for (var i in trchunArr) {
-
             trchunArr[i].eat();
             trchunArr[i].mul();
             trchunArr[i].die();
         }
     }
-
-
-    getWeather();
 
     let sendData = {
         matrix: matrix,
@@ -183,67 +178,78 @@ function drowserver() {
         weatherserver: weather,
         // grassEaterCounter: grassEaterHashiv
     }
-
-
     io.sockets.emit("data", sendData);
-
-    io.on("connection", function (socket) {
-        socket.on("fire", function (arr) {
-            var x = arr[0];
-            var y = arr[1];
-
-            var directions = [
-                [x - 1, y - 1],
-                [x, y - 1],
-                [x + 1, y - 1],
-                [x - 1, y],
-                [x + 1, y],
-                [x - 1, y + 1],
-                [x, y + 1],
-                [x + 1, y + 1]
-            ];
-
-            if (matrix[y][x] == 1) {
-                for (var i in grassArr) {
-                    if (y == grassArr[i].y && x == grassArr[i].x) {
-                        grassArr.splice(i, 1);
-                        break;
-                    };
-                }
-            } else if (matrix[y][x] == 2) {
-                for (var i in grassEaterArr) {
-                    if (y == grassEaterarr[i].y && x == grassEaterarr[i].x) {
-                        grassArr.splice(i, 1);
-                        break;
-                    };
-                }
-            }
-            matrix[y][x] = 0;
-            for (var i in directions) {
-                let harevanx = directions[i][0];
-                let harevany = directions[i][1];
-                if (matrix[harevany][harevanx] == 1) {
-                    for (var i in grassArr) {
-                        if (y == grassArr[i].y && x == grassArr[i].x) {
-                            grassArr.splice(i, 1);
-                            break;
-                        }
-                    }
-                }
-                else if (matrix[harevany][harevanx] == 2) {
-                    for (var i in grassEaterarr) {
-                        if (y == grassEaterarr[i].y && x == grassEaterarr[i].x) {
-                            grassEaterArr.splice(i, 1);
-                            break;
-                        };
-                    }
-                }
-                matrix[harevany][harevanx] = 0;
-            }
-
-        })
-    })
 }
+
+io.on('connection', function (socket){
+    socket.on("color", function (FireButton){
+        for (var i = 0; i < matrixclient.length; i++) {
+            for (var j = 0; j < matrixclient[i].length; j++) {
+                if (matrixclient[i][j] == 1) {
+                    fill('black');
+                    rect(j * side, i * side, side, side);
+                }
+            }
+        }
+     })
+    })
+    
+//    io.on("connection", function (socket) {
+//     socket.on("fire", function (arr) {
+//         var x = arr[0];
+//         var y = arr[1];
+
+//         var directions = [
+//             [x - 1, y - 1],
+//             [x, y - 1],
+//             [x + 1, y - 1],
+//             [x - 1, y],
+//             [x + 1, y],
+//             [x - 1, y + 1],
+//             [x, y + 1],
+//             [x + 1, y + 1]
+//         ];
+
+//         if (matrix[y][x] == 1) {
+//             for (var i in grassArr) {
+//                 if (y == grassArr[i].y && x == grassArr[i].x) {
+//                     grassArr.splice(i, 1);
+//                     break;
+//                 };
+//             }
+//         } else if (matrix[y][x] == 2) {
+//             for (var i in grassEaterArr) {
+//                 if (y == grassEaterarr[i].y && x == grassEaterarr[i].x) {
+//                     grassArr.splice(i, 1);
+//                     break;
+//                 };
+//             }
+//         }
+//         matrix[y][x] = 0;
+//         for (var i in directions) {
+//             let harevanx = directions[i][0];
+//             let harevany = directions[i][1];
+//             if (matrix[harevany][harevanx] == 1) {
+//                 for (var i in grassArr) {
+//                     if (y == grassArr[i].y && x == grassArr[i].x) {
+//                         grassArr.splice(i, 1);
+//                         break;
+//                     }
+//                 }
+//             }
+//             else if (matrix[harevany][harevanx] == 2) {
+//                 for (var i in grassEaterarr) {
+//                     if (y == grassEaterarr[i].y && x == grassEaterarr[i].x) {
+//                         grassEaterArr.splice(i, 1);
+//                         break;
+//                     };
+//                 }
+//             }
+//             matrix[harevany][harevanx] = 0;
+//         }
+
+//     })
+// })
 
 var obj = { "info": [] };
 function writefile() {
@@ -252,8 +258,7 @@ function writefile() {
     fs.writeFileSync(fileName, JSON.stringify(obj, null, 3))
 }
 
-setInterval(writefile, 6000)
+setInterval(drowserver, 1000)
 setInterval(getWeather, 3000)
-setInterval(drowserver, 300)
-
+setInterval(writefile, 6000)
 

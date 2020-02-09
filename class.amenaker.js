@@ -37,7 +37,7 @@ module.exports = class Amenaker extends LivingCreature{
             matrix[newY][newX] = this.index;
             this.y = newY;
             this.x = newX;
-            this.energy-=3;
+            this.energy--;
             if (this.energy <= 0) {
                 this.die();
             }

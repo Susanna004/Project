@@ -1,89 +1,82 @@
 var socket = io();
+var side = 32;
 function setup() {
-
-    var side = 32;
-
-    var matrix = [];
+    var matrixclient = [];
     let grassCountElement = document.getElementById('grassCount');
     let amenakerCountElement = document.getElementById('amenakerCount');
     var client = document.getElementById("weather");
+   // let clickbutton = ;//
 
 
     socket.on("data", drawCreatures);
 
     function drawCreatures(data) {
-
-        matrix = data.matrix;
+      console.log(data)
+        matrixclient = data.matrix;
         grassCountElement.innerText = data.grassCounter;
         amenakerCountElement.innerText = data.amenakerCounter;
         client.innerText = data.weatherserver;
 
 
         //   grassEaterCountElement.innerText = data.grassEaterCount;
-        createCanvas(matrix[0].length * side, matrix.length * side)
+        createCanvas(matrixclient[0].length * side, matrixclient.length * side)
         background('#acacac');
 
 
 
-        for (var i = 0; i < matrix.length; i++) {
-            for (var j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] == 1) {
-                    if (weather == "summer") {
+        for (var i = 0; i < matrixclient.length; i++) {
+            for (var j = 0; j < matrixclient[i].length; j++) {
+                if (matrixclient[i][j] == 1) {
+               //      if (weatherserver == "Summer") {
                         fill("#538200");
-                    }
+                   //}
                 }
-                else if (matrix[i][j] == 2) {
-                    fill("yellow");
-
-                }
-                else if (matrix[i][j] == 0) {
+          
+                else if (matrixclient[i][j] == 2) {
+                //    else if(weatherserver=="Winter"){//
+                    fill("white");
+               // }//
+            }
+            else if (matrixclient[i][j] == 2) {
+             //   else if(weatherserver=="Autumn"){
+                fill("yellow");
+          //  }//
+        }
+            
+                else if (matrixclient[i][j] == 0) {
                     fill('#acacac');
 
                 }
-                else if (matrix[i][j] == 3) {
+                else if (matrixclient[i][j] == 3) {
                     fill('#4682B4');
 
                 }
-                else if (matrix[i][j] == 4) {
+                else if (matrixclient[i][j] == 4) {
                     fill('#ff4d4d');
 
                 }
-                else if (matrix[i][j] == 5) {
+                else if (matrixclient[i][j] == 5) {
                     fill('white');
 
                 }
-            } rect(j * side, i * side, side, side);
+                rect(j * side, i * side, side, side);
+            } 
+            
         }
-
-
-
-        //  socket.on("exanak", function(w){
-        //      wather = w;
-        //     console.log(weather);
-        //  })
-        //  function myFunction() {
-        //     for (var i = 0; i < matrix.length; i++) {
-        //         for (var j = 0; j < matrix[i].length; j++) {
-        //             if (matrix[i][j] == 0) {
-        //                 fill("black");
-        //                 rect(j * side, i * side, side, side);
-        //             }
-        //   }
-        // }
-        // }
     }
-
-
-
-    function mousePressed() {
-        var x = Math.floor(mouseX / side);
-        var y = Math.floor(mouseY / side);
-        var arr = [x, y];
-        socket.emit("fire", arr)
-    }
-
-    mousePressed();
 }
+document.getElementById("button").onclick = function (){
+     socket.emit("color");
+    }
+
+
+// function mousePressed() {
+//     var x = Math.floor(mouseX / side);
+//     var y = Math.floor(mouseY / side);
+//     var arr = [x, y];
+//     console.log(arr);
+//     socket.emit("fire", arr)
+// }
 
 
 
