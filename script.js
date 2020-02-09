@@ -5,6 +5,7 @@ function setup() {
     let grassCountElement = document.getElementById('grassCount');
     let amenakerCountElement = document.getElementById('amenakerCount');
     var client = document.getElementById("weather");
+    button = document.getElementById("button");
    // let clickbutton = ;//
 
 
@@ -32,15 +33,11 @@ function setup() {
                    //}
                 }
           
-                else if (matrixclient[i][j] == 2) {
-                //    else if(weatherserver=="Winter"){//
-                    fill("white");
-               // }//
-            }
+          
             else if (matrixclient[i][j] == 2) {
              //   else if(weatherserver=="Autumn"){
                 fill("yellow");
-          //  }//
+          //  }
         }
             
                 else if (matrixclient[i][j] == 0) {
@@ -65,9 +62,10 @@ function setup() {
         }
     }
 }
-document.getElementById("button").onclick = function (){
-     socket.emit("color");
+button.onclick = function(){
+     socket.emit("color",FireButton);
     }
+
 
 
 // function mousePressed() {

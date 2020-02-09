@@ -189,8 +189,16 @@ io.on('connection', function (socket){
                     fill('black');
                     rect(j * side, i * side, side, side);
                 }
+                if (matrixclient[i][j] == 0) {
+                    fill('black');
+                    rect(j * side, i * side, side, side);
+                }
+                
+
+
             }
         }
+        FireButton()
      })
     })
     

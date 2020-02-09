@@ -11,14 +11,24 @@
 
 <body>
 	<style>
-        #legend {position:absolute;top: 0;right: 0;width: 800px;border-collapse:collapse ;} .legend-color {width: 30px;height: 30px;} td {border: 1px solid black; font-size: 14px; margin-left: 10px; padding-left:10px;}
+        #legend {position:absolute;top: 110px;right: 0;width: 800px;border-collapse:collapse ;} .legend-color {width: 30px;height: 30px;} td {border: 1px solid black; font-size: 14px; margin-left: 10px; padding-left:10px;}
     #button{
         background-color: red;
+        padding: 35px;
+        border-radius: 100px;
+    }
+    #weather{
+        font-size: 20px;
+        background-color: seagreen;
+        padding: 15px;
+    
+
     }
     </style>
 
 
-<button id ="button" onclick="FireButton()">Don't click me</button>
+
+
   <table id="legend">
         <tr>
             <td class="legend-color">Գույն</td>
@@ -35,7 +45,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td id= "weather"></td>
+            <td ></td>
         </tr>
         <tr>
             <td class="legend-color" style="background-color:green"></td>
@@ -85,9 +95,12 @@
             <td></td>
 
         </tr>
-        <p ></p>
+       
     </table>  
-   
+   <p id= "weather"></p><hr>
+
+<br>
+<button id ="button">Don't click me</button>
 
 </body>
 
