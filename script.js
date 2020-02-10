@@ -1,11 +1,14 @@
 var socket = io();
 var side = 32;
+
+
 function setup() {
     var matrixclient = [];
     let grassCountElement = document.getElementById('grassCount');
     let amenakerCountElement = document.getElementById('amenakerCount');
-    var client = document.getElementById("weather");
-    button = document.getElementById("button");
+   let client = document.getElementById("weather");
+    
+    // button = document.getElementById("button");
    // let clickbutton = ;//
 
 
@@ -27,17 +30,30 @@ function setup() {
 
         for (var i = 0; i < matrixclient.length; i++) {
             for (var j = 0; j < matrixclient[i].length; j++) {
-                if (matrixclient[i][j] == 1) {
-               //      if (weatherserver == "Summer") {
-                        fill("#538200");
-                   //}
+               if (matrix[i][j] == 1) {
+                    if (weather == "Spring") {
+                        fill("green");
+                       
+                    }
+                    else if (weather == "Summer") {
+                        fill("darkgreen");
+                       
+                    }
+                    else if (weather == "Autumn") {
+                        fill("orange");
+                 
+                    }
+                    else if (weather == "Winter") {
+                        fill("skyblue");
+              
+                    }
                 }
+                    
+            
           
           
             else if (matrixclient[i][j] == 2) {
-             //   else if(weatherserver=="Autumn"){
                 fill("yellow");
-          //  }
         }
             
                 else if (matrixclient[i][j] == 0) {
@@ -62,19 +78,17 @@ function setup() {
         }
     }
 }
-button.onclick = function(){
-     socket.emit("color",FireButton);
-    }
 
 
 
-// function mousePressed() {
-//     var x = Math.floor(mouseX / side);
-//     var y = Math.floor(mouseY / side);
-//     var arr = [x, y];
-//     console.log(arr);
-//     socket.emit("fire", arr)
-// }
+
+function mouseClicked(arr) {
+    var x = random(mouseX / side);
+    var y = random(mouseY / side);
+    var arr = [x, y];
+    console.log(arr);
+    socket.emit("fire", arr);
+}
 
 
 
