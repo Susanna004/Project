@@ -1,22 +1,34 @@
 var socket = io();
 var side = 32;
+var clientweather = "Summer";
+
+
+function MouseClicked(arr) {
+    var x = random(mouseX / side);
+    var y = random(mouseY / side);
+    var arr = [x, y];
+    console.log(arr);
+    socket.emit("fire", arr);
+}
 
 
 function setup() {
     var matrixclient = [];
     let grassCountElement = document.getElementById('grassCount');
     let amenakerCountElement = document.getElementById('amenakerCount');
-   let client = document.getElementById("weather");
-    
-    // button = document.getElementById("button");
-   // let clickbutton = ;//
+    let client = document.getElementById("weather");
+
+    let button = document.getElementById("button");
+    button.onclick = MouseClicked;
+    // let clickbutton = ;//
 
 
     socket.on("data", drawCreatures);
 
     function drawCreatures(data) {
-      console.log(data)
+        console.log(data)
         matrixclient = data.matrix;
+        clientweather = data.weatherserver;
         grassCountElement.innerText = data.grassCounter;
         amenakerCountElement.innerText = data.amenakerCounter;
         client.innerText = data.weatherserver;
@@ -30,32 +42,28 @@ function setup() {
 
         for (var i = 0; i < matrixclient.length; i++) {
             for (var j = 0; j < matrixclient[i].length; j++) {
-               if (matrix[i][j] == 1) {
-                    if (weather == "Spring") {
+                if (matrixclient[i][j] == 1) {
+                    if (clientweather == "Spring") {
                         fill("green");
-                       
                     }
-                    else if (weather == "Summer") {
+                    else if (clientweather == "Summer") {
                         fill("darkgreen");
-                       
+
                     }
-                    else if (weather == "Autumn") {
+                    else if (clientweather == "Autumn") {
                         fill("orange");
-                 
+
                     }
-                    else if (weather == "Winter") {
+                    else if (clientweather == "Winter") {
                         fill("skyblue");
-              
+
                     }
                 }
-                    
-            
-          
-          
-            else if (matrixclient[i][j] == 2) {
-                fill("yellow");
-        }
-            
+
+                else if (matrixclient[i][j] == 2) {
+                    fill("yellow");
+                }
+
                 else if (matrixclient[i][j] == 0) {
                     fill('#acacac');
 
@@ -73,25 +81,8 @@ function setup() {
 
                 }
                 rect(j * side, i * side, side, side);
-            } 
-            
+            }
+
         }
     }
 }
-
-
-
-
-function mouseClicked(arr) {
-    var x = random(mouseX / side);
-    var y = random(mouseY / side);
-    var arr = [x, y];
-    console.log(arr);
-    socket.emit("fire", arr);
-}
-
-
-
-
-
-

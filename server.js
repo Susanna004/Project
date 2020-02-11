@@ -25,6 +25,15 @@ app.get("/", function (req, res) {
 server.listen(3000);
 
 
+//Global Data
+
+let sendData = {
+    matrix: matrix,
+    grassCounter: grassHashiv,
+    amenakerCounter: amenakerHashiv,
+    weatherserver: weather,
+    // grassEaterCounter: grassEaterHashiv
+}
 
 var Grass = require("./class.grass.js");
 var GrassEater = require("./class.eatgrass.js");
@@ -170,96 +179,20 @@ function drowserver() {
             trchunArr[i].die();
         }
     }
-
-    let sendData = {
-        matrix: matrix,
-        grassCounter: grassHashiv,
-        amenakerCounter: amenakerHashiv,
-        weatherserver: weather,
-        // grassEaterCounter: grassEaterHashiv
-    }
     io.sockets.emit("data", sendData);
 }
 
-io.on('connection', function (socket){
-    socket.on("fire", function (arr){
-       
-       
-     })
-    })
-    
-   io.on("connection", function (socket) {
-    socket.on("fire", function (arr) {
-        var x = arr[0];
-        var y = arr[1];
-
-        // var directions = [
-        //     [x - 1, y - 1],
-        //     [x, y - 1],
-        //     [x + 1, y - 1],
-        //     [x - 1, y],
-        //     [x + 1, y],
-        //     [x - 1, y + 1],
-        //     [x, y + 1],
-        //     [x + 1, y + 1]
-        // ];
-
-        // for (var i = 0; i < matrix.length; i++) {
-        //     for (var j = 0; j < matrix[i].length; j++) {
-        //         if (matrix[i][j] == 1) {
-        //             fill('black');
-        //             rect(j * side, i * side, side, side);
-        //         }
-        //         else if (matrix[i][j] == 0) {
-        //             fill('black');
-        //             rect(j * side, i * side, side, side);
-        //         }
-                
-
-
-        //     }
-        // }
-        
-        if (matrix[y][x] == 1) {
-            for (var i in grassArr) {
-                if (y == grassArr[i].y && x == grassArr[i].x) {
-                    fill('black');
-                    break;
-                };
-            }
-        } else if (matrix[y][x] == 2) {
-            for (var i in grassEaterArr) {
-                if (y == grassEaterarr[i].y && x == grassEaterarr[i].x) {
-                    fill('black');
-                    break;
-                };
+io.on('connection', function (socket) {
+    socket.on("fire", function () {
+        for (var y = 0; y < matrix.length; y++) {
+            for (var x = 0; x < matrix[y].length; x++) {
+                matrix[y][x] = 0;
             }
         }
-        // matrix[y][x] = 0;
-        // for (var i in directions) {
-        //     let harevanx = directions[i][0];
-        //     let harevany = directions[i][1];
-        //     if (matrix[harevany][harevanx] == 1) {
-        //         for (var i in grassArr) {
-        //             if (y == grassArr[i].y && x == grassArr[i].x) {
-        //                 grassArr.splice(i, 1);
-        //                 break;
-        //             }
-        //         }
-        //     }
-        //     else if (matrix[harevany][harevanx] == 2) {
-        //         for (var i in grassEaterarr) {
-        //             if (y == grassEaterarr[i].y && x == grassEaterarr[i].x) {
-        //                 grassEaterArr.splice(i, 1);
-        //                 break;
-        //             };
-        //         }
-        //     }
-        //     matrix[harevany][harevanx] = 0;
-        // }
-
+        io.sockets.emit("data", sendData);
     })
 })
+
 
 var obj = { "info": [] };
 function writefile() {
@@ -272,4 +205,3 @@ function writefile() {
 setInterval(drowserver, 1000)
 setInterval(getWeather, 3000)
 setInterval(writefile, 6000)
-
